@@ -127,7 +127,7 @@ public class UserLogin extends ActionSupport implements ModelDriven,ServletReque
 		  this.request=request;		
 		  System.out.println("Struts REQUEST info----"+this.request.getRequestedSessionId()
 			
-				  +"$$$"+this.request.getRequestURI());
+				  +"$$$"+this.request.getRequestURI()); 
 //		  /test_asso1/userlogin.action
 		  System.out.println("request.getSession()----"+request.getSession());
 //		  System.out.println("this.uInfo.getUsername()---"+this.uInfo.getUsername());
