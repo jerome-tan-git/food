@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import com.asso.manager.UserManager;
 import com.asso.model.MemberInfo;
 import com.asso.model.User;
-import com.maggie.ssh1.vo.UserRegisterInfo;
+import com.asso.vo.UserRegisterInfo;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 

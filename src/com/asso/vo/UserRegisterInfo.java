@@ -1,4 +1,4 @@
-package com.maggie.ssh1.vo;
+package com.asso.vo;
 
 public class UserRegisterInfo {
 	

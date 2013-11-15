@@ -34,6 +34,8 @@ public class Exam {
 		this.targetdate = targetdate;
 	}
 	
-	
+	public String toString(){
+		return this.getId()+":"+this.getName()+":"+this.getGroupid()+":"+this.getTargetdate();
+	}
 
 }

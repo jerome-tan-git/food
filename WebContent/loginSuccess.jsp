@@ -13,11 +13,45 @@
 		<s:property value="username"/>
 	<!-- </s:iterator> -->
 	
-	<!-- <a href="hello.html">浏览页面</a> -->
+	<br>
 	<a href="checksession.action">浏览页面</a>
-	<!-- <form method="post" action="userlogout.action">
+	<br><br>
+	添加考题
+	 <form method="post" action="userlogin.action">
+	问题：<input type="password" name="password" ><br> 
+	 类型：<input type="text" name="username" ><br>
+	答案选项：
+	 参考答案：<input type="password" name="password1" ><br>
+	 <input type="submit" value="提交">
+	 </form>
+	 <br>
+	 编辑考题 
+	 <form method="post" action="itemslist.action">	 
+	 	题型：<input type="text" name="username" ><br>	
+	 	<input type="submit" value="搜索">
+	 </form>
+	 <form method="post" action="itemslist.action">
+	问题：<input type="password" name="password" ><br> 
+	 类型：<input type="text" name="username" ><br>
+	答案选项：
+	 参考答案：<input type="password" name="password1" ><br>
+	 <input type="submit" value="选中">
+	 </form>
+	 <form method="post" action="userlogin.action">
+		 <input type="submit" value="更新">
+	 </form>
+	 <form method="post" action="userlogin.action">
+		 <input type="submit" value="删除">
+	 </form>
+	<a href="beginexam.action"></a>
+	<a href="beginexam.action">编辑考题</a>
+	<a href="beginexam.action">删除考题</a>
+	
+	<br>
+	<a href="beginexam.action">开始考试</a>
+	<br>
+	<form method="post" action="userlogout.action">
 		 <input type="submit" value="登出">
 	</form>
-	 -->
 </body>
 </html>

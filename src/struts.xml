@@ -28,6 +28,9 @@
 		<action name="checksession" class="com.asso.action.CheckSession" >  
 			<result name="success">loginSuccess.jsp</result>			 
 		</action>
+		<action name="userlogout" class="com.asso.action.UserLogout" >  
+			<result name="success">hello.html</result>			 
+		</action>
 		
 
     </package>
