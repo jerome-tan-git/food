@@ -114,6 +114,11 @@ public class ExamManagerImpl implements ExamManager {
 		return examDao.loadExamItemById(itemid).get(0);
 	}
 	@Override
+	public ExamItem loadItemByQ(String question) throws ClassNotFoundException,SQLException {
+		System.out.println("EXAMmanagerImpl----loaditemByQuestion---"+question);
+		return examDao.loadExamItemByQ(question).get(0);
+	}
+	@Override
 	public List<ExamItem> loadItemlistByCatid(int catid) throws ClassNotFoundException,SQLException {
 		System.out.println("EXAMmanagerImpl----loaditemlist---"+catid);
 		return examDao.loadExamItemByCatId(catid);

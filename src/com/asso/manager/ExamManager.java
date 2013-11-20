@@ -29,11 +29,10 @@ public interface ExamManager {
 	public List<ExamRef> loadRefs(int itemid) throws ClassNotFoundException,SQLException;
 	
 	public HashMap<ExamItem, List<ExamRef>> loadItemsByExamId(User user) throws ClassNotFoundException, SQLException;
-	ExamItem loadItem(int itemid) throws ClassNotFoundException, SQLException;
-	List<ExamItem> loadItemlistByCatid(int catid)
-			throws ClassNotFoundException, SQLException;
-	List<ExamItem> loadItemlistByExamid(int examid)
-			throws ClassNotFoundException, SQLException;
+	public ExamItem loadItem(int itemid) throws ClassNotFoundException, SQLException;
+	public ExamItem loadItemByQ(String question) throws ClassNotFoundException, SQLException;
+	public List<ExamItem> loadItemlistByCatid(int catid) throws ClassNotFoundException, SQLException;
+	public List<ExamItem> loadItemlistByExamid(int examid) throws ClassNotFoundException, SQLException;
 	
 	
 	

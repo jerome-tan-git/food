@@ -39,14 +39,14 @@ public class ExamDaoImpl implements ExamDao {
 		List<ExamItem> items = new ArrayList<ExamItem>();		
 		 Session s = sessionFactory.openSession(); 
 //		Session s = sessionFactory.getCurrentSession(); 
-	     s.beginTransaction();
+//	     s.beginTransaction();
 	     
 	     String hql = "from examitem where id=?";      
 	     Query query = s.createQuery(hql); 
 	     query.setString(0, ""+eid); 
 			
 	     items = query.list();    
-	     s.getTransaction().commit();
+	     s.close();
 		 
 	     System.out.println("Get examItem list size="+items.size());	
 		return items.get(0);//prevent null
@@ -56,13 +56,13 @@ public class ExamDaoImpl implements ExamDao {
 		List<ExamRef> refs = new ArrayList<ExamRef>();		
 		 Session s = sessionFactory.openSession(); 
 //		Session s = sessionFactory.getCurrentSession(); 
-	     s.beginTransaction();
+//	     s.beginTransaction();
 	     
 	     String hql = "from ExamRef where itemid=?";      
 	     Query query = s.createQuery(hql); 
 	     query.setString(0, ""+itemid);			
 	     refs = query.list();    
-	     s.getTransaction().commit();
+	     s.close();
 		 
 	     System.out.println("Get item="+itemid+", examrefs list size="+refs.size());
 	     return refs;
@@ -71,12 +71,12 @@ public class ExamDaoImpl implements ExamDao {
 		 int eid = 0;
 	     Session s = sessionFactory.openSession(); 
 //			Session s = sessionFactory.getCurrentSession(); 
-		 s.beginTransaction();
+//		 s.beginTransaction();
 		
 	     Query query = s.createQuery("select id from exam e where e.groupid = ?")
 			    		.setParameter(0, groupid);
         List<Object> list = query.list();  
-	     s.getTransaction().commit();
+        s.close();
 			    
 	     if(list.size() > 0) {
 			  eid = (Integer) list.get(0);
@@ -90,12 +90,10 @@ public class ExamDaoImpl implements ExamDao {
 		List<Integer> itemids = new ArrayList<Integer>();
 	     Session s = sessionFactory.openSession(); 
 //			Session s = sessionFactory.getCurrentSession(); 
-		 s.beginTransaction();
-		
 	     Query query = s.createQuery("select id from examitem er where er.examid = ?")
 			    		.setParameter(0, eid);
        List<Object> list = query.list();  
-	     s.getTransaction().commit();
+       s.close();
 			    
 	     if(list.size() > 0) {
 	    	 for(Object o:list){
@@ -153,14 +151,8 @@ public class ExamDaoImpl implements ExamDao {
 	}
 	@Override
 	public void update(List<ExamRef> refs) {
-		for(ExamRef ref:refs){
+		for(ExamRef ref:refs)
 			this.update(ref);
-//			Session s = sessionFactory.openSession(); 
-////			Session s = sessionFactory.getCurrentSession(); 
-//		     s.beginTransaction();
-//		     s.update(ref);
-//		     s.getTransaction().commit();
-		}
 	}
 	@Override
 	public void delete(ExamItem examitem) {
@@ -179,20 +171,15 @@ public class ExamDaoImpl implements ExamDao {
 		s.getTransaction().commit();		
 	}
 	@Override
-	public void deleteRefs(ExamItem examitem) {
-		
+	public void deleteRefs(ExamItem examitem) {		
 		List<ExamRef> refs = this.loadExamRefsWithExamItemid(examitem.getId());		
-		for(ExamRef ref:refs){
-			System.out.println("---------ref id="+ref.getId());
+		for(ExamRef ref:refs)			
 			this.delete(ref);
-		}		
 	}
 	@Override
 	public List<ExamRef> loadExamRefById(int _id) {
 		Session s = sessionFactory.openSession();
 //		Session s = sessionFactory.getCurrentSession(); 
-	    s.beginTransaction();
-	    
 	    String hql = "from ExamRef where id=?";      
         Query query = s.createQuery(hql); 
         query.setString(0, ""+_id); 
@@ -200,24 +187,23 @@ public class ExamDaoImpl implements ExamDao {
 //        for(ExamRef o : ref){   
 //            System.out.println(o.toString());
 //        }   		
-	    s.getTransaction().commit();
+        s.close();
 	    return ref;
 	}
 	@Override
 	public List<ExamRef> loadReflistByItemId(int _id) {
 		Session s = sessionFactory.openSession();
 //		Session s = sessionFactory.getCurrentSession(); 
-	    s.beginTransaction();
 	    
 	    String hql = "from ExamRef where itemid=?";      
         Query query = s.createQuery(hql); 
-        query.setString(0, ""+_id); 
+        query.setString(0, ""+_id);        
         List<ExamRef> ref = query.list();
-//        System.out.println("Get reflist size="+ref.size());
-//        for(ExamRef o : ref){   
-//            System.out.println(o.toString());
-//        }   		
-	    s.getTransaction().commit();
+        System.out.println("Get reflist size="+ref.size());
+        for(ExamRef o : ref){   
+            System.out.println(">>>"+o.toString());
+        }   		
+	    s.close();
 	    return ref;
 	}
 	
@@ -225,8 +211,6 @@ public class ExamDaoImpl implements ExamDao {
 	public List<ExamItem> loadExamItemById(int _id) {
 		Session s = sessionFactory.openSession();
 //		Session s = sessionFactory.getCurrentSession(); 
-	    s.beginTransaction();
-	    
 	    String hql = "from ExamItem where id=?";      
         Query query = s.createQuery(hql); 
         query.setString(0, ""+_id); 
@@ -234,15 +218,27 @@ public class ExamDaoImpl implements ExamDao {
 //        for(ExamItem o : item){   
 //            System.out.println(o.toString());
 //        }   		
-	    s.getTransaction().commit();
+        s.close();
+	    return item;
+	}
+	@Override
+	public List<ExamItem> loadExamItemByQ(String _question) {
+		Session s = sessionFactory.openSession();
+//		Session s = sessionFactory.getCurrentSession(); 
+	    String hql = "from ExamItem where question=?";      
+        Query query = s.createQuery(hql); 
+        query.setString(0, ""+_question); 
+        List<ExamItem> item = query.list();
+//        for(ExamItem o : item){   
+//            System.out.println(o.toString());
+//        }   		
+        s.close();
 	    return item;
 	}
 	@Override
 	public List<ExamItem> loadExamItemByCatId(int cid) {
 		Session s = sessionFactory.openSession();
 //		Session s = sessionFactory.getCurrentSession(); 
-	    s.beginTransaction();
-	    
 	    String hql = "from ExamItem where category=?";      
         Query query = s.createQuery(hql); 
         query.setString(0, ""+cid); 
@@ -250,14 +246,14 @@ public class ExamDaoImpl implements ExamDao {
 //        for(ExamItem o : items){   
 //            System.out.println(o.toString());
 //        }   		
-	    s.getTransaction().commit();
+        s.close();
 	    return items;
 	}
 	@Override
 	public List<ExamItem> loadExamItemByExamId(int eid) {
 		Session s = sessionFactory.openSession();
 //		Session s = sessionFactory.getCurrentSession(); 
-	    s.beginTransaction();
+//	    s.beginTransaction();
 	    
 	    String hql = "from ExamItem where examid=?";      
         Query query = s.createQuery(hql); 
@@ -266,7 +262,7 @@ public class ExamDaoImpl implements ExamDao {
 //        for(ExamItem o : items){   
 //            System.out.println(o.toString());
 //        }   		
-	    s.getTransaction().commit();
+        s.close();
 	    return items;
 	}
 	

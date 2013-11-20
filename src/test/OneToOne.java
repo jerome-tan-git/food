@@ -130,6 +130,11 @@ public class OneToOne {
 //		ua.setuInfo(info);
 //		System.out.println(ua.execute());
 		
+		ExamBuiltInfo info = new ExamBuiltInfo();
+		info.setExamname("test");
+		ExamItemsList eil = new ExamItemsList();
+		eil.seteInfo(info);
+		System.out.println(eil.execute());
 		
 //		ExamBuiltInfo info = new ExamBuiltInfo();
 //		info.setExamid(2);
@@ -217,34 +222,34 @@ public class OneToOne {
 //		System.out.println(eil.execute());
 		
 		//load
-		ExamItemsList eil = new ExamItemsList();
-		ExamBuiltInfo info = new ExamBuiltInfo();
-//		info.setRefid(30);
-//		info.setExamitemid(1);
-//		info.setCategory(2);
-		info.setExamid(0);
-//		info.setExamitemid(6);
-		eil.seteInfo(info);
-		System.out.println(eil.execute());
-//		System.out.println(eil.getItem().toString());
-//		for(ExamItem i:eil.getItemlist()){
-//			System.out.println(i.toString());
-//		}
-//		for(ExamItem i:eil.getItemf().keySet()){
-//			System.out.println(i.toString());
-//			for(ExamRef r:eil.getItemf().get(i)){
-//				System.out.println("----"+r.toString());
+//		ExamItemsList eil = new ExamItemsList();
+//		ExamBuiltInfo info = new ExamBuiltInfo();
+////		info.setRefid(30);
+////		info.setExamitemid(1);
+////		info.setCategory(2);
+//		info.setExamid(0);
+////		info.setExamitemid(6);
+//		eil.seteInfo(info);
+//		System.out.println(eil.execute());
+////		System.out.println(eil.getItem().toString());
+////		for(ExamItem i:eil.getItemlist()){
+////			System.out.println(i.toString());
+////		}
+////		for(ExamItem i:eil.getItemf().keySet()){
+////			System.out.println(i.toString());
+////			for(ExamRef r:eil.getItemf().get(i)){
+////				System.out.println("----"+r.toString());
+////			}
+////		}
+//		System.out.println("--**--hashmap--size-"+eil.getItemlistf().size());
+//		for(HashMap<ExamItem,List<ExamRef>> f:eil.getItemlistf()){			
+//			for(ExamItem i:f.keySet()){
+//				System.out.println("--**--"+i.toString());
+//				for(ExamRef r:f.get(i)){
+//					System.out.println("----"+r.toString());
+//				}
 //			}
 //		}
-		System.out.println("--**--hashmap--size-"+eil.getItemlistf().size());
-		for(HashMap<ExamItem,List<ExamRef>> f:eil.getItemlistf()){			
-			for(ExamItem i:f.keySet()){
-				System.out.println("--**--"+i.toString());
-				for(ExamRef r:f.get(i)){
-					System.out.println("----"+r.toString());
-				}
-			}
-		}
 		
 	}
 
